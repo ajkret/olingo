@@ -1,0 +1,45 @@
+plugins {
+	id 'org.springframework.boot' version '2.5.3'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'com.dersommer'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-jersey'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation ('org.apache.olingo:olingo-odata2-core:2.0.11') {
+		exclude group: 'javax.ws.rs', module: 'javax.ws.rs-api'
+	}
+	implementation 'org.apache.olingo:olingo-odata2-jpa-processor-core:2.0.11'
+	implementation ('org.apache.olingo:olingo-odata2-jpa-processor-ref:2.0.11'){
+		exclude group: 'org.eclipse.persistence', module: 'eclipselink'
+	}
+	implementation 'com.h2database:h2'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	testCompileOnly 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
+
+}
+
+test {
+	useJUnitPlatform()
+}
